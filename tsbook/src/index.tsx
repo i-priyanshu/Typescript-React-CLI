@@ -5,10 +5,12 @@ import ReactDOM from "react-dom";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 import CodeEditor from "./components/code-editor";
+import Preview from './components/preview';
+
 
 const App = () => {
   const ref = useRef<any>();
-  const iframe = useRef<any>();
+  const [code , setCode] = useState('');
   const [input, setInput] = useState("");
 
   const startService = async () => {
@@ -26,7 +28,7 @@ const App = () => {
     if (!ref.current) {
       return;
     }
-    iframe.current.srcdoc = html;
+
 
     const result = await ref.current.build({
       entryPoints: ["index.js"],
@@ -39,23 +41,9 @@ const App = () => {
       },
     });
     // console.log(result);
-    // setCode(result.outputFiles[0].text);
-    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, "*");
+    setCode(result.outputFiles[0].text);
   };
 
-  const html = `
-<html>
-   <head></head>
-  <body>
-   <div id="root"></div>
-   <script>
-      window.addEventListener('message' , (event) => {
-       eval(event.data);
-       },false);
-    </script>
-  </body>
-</html>
-`;
 
   return (
     <div>
@@ -67,13 +55,8 @@ const App = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       ></textarea>
-      <div>{/* <button onClick={onClick}>Submit</button> */}</div>
-      <iframe
-        title="code-preview"
-        ref={iframe}
-        sandbox="allow-scripts"
-        srcDoc={html}
-      />
+      <div><button onClick={onClick}>Submit</button></div>
+      <Preview code={code} />
     </div>
   );
 };
