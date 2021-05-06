@@ -1,6 +1,5 @@
 import "bulmaswatch/superhero/bulmaswatch.min.css";
 import ReactDOM from "react-dom";
-import CodeCell from "./components/code-cell";
 import { Provider } from "react-redux";
 import { store } from "./State";
 import CellList from "./components/cell-list";
