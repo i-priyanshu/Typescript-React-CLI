@@ -1,6 +1,7 @@
-import { orderedListCommand } from "@uiw/react-md-editor/lib/cjs/commands";
+import { Fragment } from "react";
 import { useTypedSelector } from "../hooks/use-typed-selector";
 import CellListItem from "./cell-list-item";
+import AddCell from "./add-cell";
 
 const CellList: React.FC = () => {
   const cells = useTypedSelector(({ cells: { order, data } }) => {
@@ -10,9 +11,17 @@ const CellList: React.FC = () => {
   });
 
   const renderedCells = cells.map((cell) => (
-    <CellListItem key={cell.id} cell={cell} />
+    <Fragment key={cell.id}>
+      <AddCell nextCellId={cell.id} />
+      <CellListItem cell={cell} />
+    </Fragment>
   ));
-  return <div>{renderedCells}</div>;
+  return (
+    <div>
+      {renderedCells}
+      <AddCell nextCellId={null} />
+    </div>
+  );
 };
 
 export default CellList;
