@@ -46,7 +46,6 @@ const Preview: React.FC<PreviewProps> = ({ code, err }) => {
     }, 50);
   }, [code]);
 
-  console.log(err);
   return (
     <div className="preview-wrapper">
       <iframe
