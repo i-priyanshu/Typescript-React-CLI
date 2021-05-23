@@ -59,6 +59,7 @@ exports.serveCommand = new commander_1.Command()
                     return [4 /*yield*/, local_api_1.serve(parseInt(options.port), path_1.default.basename(filename), dir)];
                 case 1:
                     _a.sent();
+                    console.log("Opened " + filename + ". Navigate to http://localhost:" + options.port + " to edit the file.");
                     return [3 /*break*/, 3];
                 case 2:
                     err_1 = _a.sent();
@@ -68,6 +69,7 @@ exports.serveCommand = new commander_1.Command()
                     else {
                         console.log("Heres the problem -> ", err_1.message);
                     }
+                    process.exit(1);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
