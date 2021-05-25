@@ -1,7 +1,7 @@
 {
-  "name": "cli",
+  "name": "pro-editor-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "CLI configuration and code files for Pro-Editor.",
   "scripts": {
     "start": "tsc --watch --preserveWatchOutput"
   },
